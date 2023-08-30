@@ -109,9 +109,9 @@ const App = () => {
      }
 
       return(
-        <div className='grid-item'>
+        <div className='grid-item' key={dino.species}>
           <h3> {dino.species} </h3>
-          <img src={dino.image} alt = "dinosaur's picture"/>
+          <img src={dino.image} alt = "dinosaur"/>
           <p> {displayFact()} </p>
         </div>
       )
@@ -257,3 +257,12 @@ export default App;
 
 
 
+// Suggestions to Make Your Project Stand Out
+// Validate the form data to ensure the data is acceptable and complete.
+// Allow the user to generate a new infographic.
+// Move the tile colors from CSS to JS for more control.
+// Randomize the order of the tiles while keeping the human in the middle.
+// Create a hover state on the tiles that displays the rest of the species statistics.
+// Create additional methods for comparing data.
+// Rewrite the project to use constructor functions, factory functions, the module pattern, and revealing module pattern
+// Allow the user to select different units for the numbers and update the methods to account for this.
