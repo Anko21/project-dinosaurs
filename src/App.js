@@ -242,10 +242,10 @@ const App = () => {
                 onChange={handleChange}
                 required
                 >
-                  <option selected>--Select--</option>
-                  <option>Herbavor</option>
-                  <option>Omnivor</option>
-                  <option>Carnivor</option>
+                  <option value=''>--Select--</option>
+                  <option value='herbavor'>Herbavor</option>
+                  <option value='omnivor'> Omnivor</option>
+                  <option value='carnivor'>Carnivor</option>
                 </select>
                 <button type="submit" id="btn">Compare Me!</button>
             </div>
