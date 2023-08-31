@@ -80,7 +80,6 @@ const App = () => {
 
     function thirdMethod(diet,species) {
       const humansDiet = human.diet.toLowerCase()
-      console.log(humansDiet)
       if (humansDiet === diet) {
         return `${species} and you have the same diet ! How cool is that ! `
       } else {
