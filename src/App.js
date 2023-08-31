@@ -35,15 +35,17 @@ const App = () => {
 
   // Create Dino Objects
 
-  function Dinosaurs(species,weight,height,diet,where,when,fact) {
-    this.species= species;
-    this.weight= weight;
-    this.height= height;
-    this.diet= diet;
-    this.where= where;
-    this.when= when;
-    this.fact= fact;
-    this.image= `images/${species}.png`;
+  class Dinosaurs {
+    constructor(species, weight, height, diet, where, when, fact) {
+      this.species = species;
+      this.weight = weight;
+      this.height = height;
+      this.diet = diet;
+      this.where = where;
+      this.when = when;
+      this.fact = fact;
+      this.image = `images/${species.toLowerCase()}.png`
+    }
   };
 
   const dinos=dino.Dinos.map((dinosaur) => {
@@ -57,41 +59,46 @@ const App = () => {
     // Create Dino Compare Method 1
 
     function firstMethod(species,weight) {
+      const humanWeight = Number(human.weight)
       return unitRadioBtn === 'imperial'?
-      `${species} weighted almost ${Math.floor(weight/human.weight)} lbs more than you`
+      `${species} weighted almost ${Math.floor(weight - humanWeight)} lbs more than you.`
       :
-      `${species} weighted almost ${Math.floor((weight/2.205) - human.weight)} kg more than you`;
+      `${species} weighted almost ${Math.floor((weight/2.205) - humanWeight)} kg more than you.`;
     }
 
     // Create Dino Compare Method 2
 
     function secondMethod(species,height) {
+      const humanHeight = (Number(human.feet*12)) + Number(human.inches)
       return unitRadioBtn === 'imperial'?
-      `${species} was almost ${Math.floor((height/12) - human.feet)} feet higher than you`
+      `${species} was almost ${Math.floor(height - humanHeight)} inches higher than you.`
       :
-      `${species} was almost ${Math.floor((height*2.54) - human.cm)} cm higher than you`;
+      `${species} was almost ${Math.floor((height*2.54) - human.cm)} cm higher than you.`;
     }
 
     // Create Dino Compare Method 3
 
-    function thirdMethod(species,height) {
-      return unitRadioBtn === 'imperial'?
-      `${species} was almost ${Math.floor(height - human.inches)} inches higher than you`
-      :
-      `${species} was almost ${Math.floor((height*2.54) - human.cm)} cm higher than you`;
+    function thirdMethod(diet,species) {
+      const humansDiet = human.diet.toLowerCase()
+      console.log(humansDiet)
+      if (humansDiet === diet) {
+        return `${species} and you have the same diet ! How cool is that ! `
+      } else {
+        return `You are a ${humansDiet} but ${species} is a ${diet} !`
+      }
     }
 
     // Generate Tiles for each Dino in Array
     const tiles = dinos.map((dino) => {
-      const fact1= `${dino.species} lived at ${dino.where}`;
-      const fact2= `${dino.species} lived in the ${dino.when}`;
+      const fact1= `${dino.species} lived at ${dino.where}.`;
+      const fact2= `${dino.species} lived in the ${dino.when}.`;
       const facts= [
         fact1,
         fact2,
         dino.fact,
         firstMethod(dino.species,dino.weight),
         secondMethod(dino.species,dino.height),
-        thirdMethod(dino.species,dino.height),
+        thirdMethod(dino.diet,dino.species),
       ];
       function randomFact() {
         return Math.floor(Math.random()*facts.length);
@@ -233,7 +240,9 @@ const App = () => {
                 name="diet"
                 value={human.diet}
                 onChange={handleChange}
+                required
                 >
+                  <option selected>--Select--</option>
                   <option>Herbavor</option>
                   <option>Omnivor</option>
                   <option>Carnivor</option>
